@@ -82,5 +82,24 @@ button:hover {
 
 table *{
     border: solid black 1px;
+}
+
+#addressInput{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#autoComplete{
+    background-color: #caf0f8;
+    width: 310px;
+    height: auto;
+}
+
+.autoComplete{
+    background-color: inherit;
+    border: solid blue 1px;
+    color: blue;
     margin: 0px;
+    cursor: pointer;
 }

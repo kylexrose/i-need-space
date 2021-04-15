@@ -1,9 +1,14 @@
+const loc = document.querySelector("#address");
+loc.addEventListener("keyup", () => {
+    if (loc.value.length > 3){
+        autoComplete();
+    }
+})
 document.querySelector("#search").addEventListener('click', () => searchForSatellites())
 
 function searchForSatellites(){
-    const key = document.querySelector("#api-key").value;
-    let address = encodeURI(document.querySelector("#address").value);
-    //address = 'pk.eyJ1Ijoia29vbG1pbmlzdGVyIiwiYSI6ImNrbmhvbGJyNTA3am4yb3FyMGtqOGgzbmgifQ.6Sakt1E00RQ0_aVIbu8Dxg'
+    key = document.querySelector("#api-key").value;
+    let address = encodeURI(loc.value);
     const geoURL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${key}`
     const norad = document.querySelector("#norad").value;
     fetch(geoURL)
@@ -35,3 +40,32 @@ function findSatellites(satellite, lat, lon){
             document.querySelector("table").hidden=false;
         })
 }   
+
+function autoComplete(){
+    let autoArray = [];
+    key = document.querySelector("#api-key").value;
+    let address = encodeURI(loc.value);
+    const geoURL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${key}`
+    fetch(geoURL)
+        .then((res) => res.json())
+        .then((data) => {
+            autoArray = [];
+            for(let i = 0; i < data.features.length; i++){
+                autoArray.push(data.features[i].place_name)
+            }
+            console.log(autoArray);
+            autoPopulate(autoArray)
+        })
+}
+
+function autoPopulate(array){
+    const autoField = document.querySelector("#autoComplete");
+    let autoHTML = "";
+    for(let i = 0; i < array.length; i++){
+        autoHTML += `<p class="autoComplete" id="choice${i}">${array[i]}</p>`
+    }
+    autoField.innerHTML = autoHTML;
+    document.querySelectorAll(".autoComplete").forEach(element => element.addEventListener("click", ()=>{
+        loc.value = element.innerHTML;
+    }))
+}
