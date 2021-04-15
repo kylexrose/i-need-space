@@ -67,5 +67,6 @@ function autoPopulate(array){
     autoField.innerHTML = autoHTML;
     document.querySelectorAll(".autoComplete").forEach(element => element.addEventListener("click", ()=>{
         loc.value = element.innerHTML;
+        autoField.innerHTML = "";
     }))
 }
