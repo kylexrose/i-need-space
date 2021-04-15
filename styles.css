@@ -79,3 +79,8 @@ button {
 button:hover {
     box-shadow: 0 0 20px #caf0f8;
 }
+
+table *{
+    border: solid black 1px;
+    margin: 0px;
+}
