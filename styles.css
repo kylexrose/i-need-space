@@ -94,6 +94,8 @@ table *{
     background-color: #caf0f8;
     width: 210px;
     height: auto;
+    position: absolute;
+    margin-top: 25px;
 }
 
 .autoComplete{

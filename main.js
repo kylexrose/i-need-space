@@ -1,7 +1,9 @@
 const loc = document.querySelector("#address");
 loc.addEventListener("keyup", () => {
-    if (loc.value.length > 3){
+    if (loc.value.length >= 3){
         autoComplete();
+    }else if(loc.value.length < 3){
+        document.querySelector("#autoComplete").innerHTML = "";
     }
 })
 document.querySelector("#search").addEventListener('click', () => searchForSatellites())
